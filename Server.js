@@ -42,12 +42,11 @@ export const router = express.Router()
 
 
 isMain(
-    import.meta.url) && function() {
+        import.meta.url) &&
     express().use(CORS({
-            origin: [
-                'https://devcms.yonsei.ac.kr',
-                'https://kbdlab.hwangsehyun.com',
-            ]
-        })).use('/', router)
-        .run(8000);
-};
+        origin: [
+            'https://devcms.yonsei.ac.kr',
+            'https://kbdlab.hwangsehyun.com',
+        ]
+    })).use('/', router)
+    .listen(8000);
