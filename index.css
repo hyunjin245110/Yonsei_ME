@@ -1,0 +1,59 @@
+.lnk-wrap {
+    width: 100%;
+    padding: 50px 0;
+    background-color: #fff;
+}
+
+.main-banner01 {
+    margin: 0 auto;
+    max-width: 1240px;
+    position: relative;
+    padding: 0 0 50px 0;
+    overflow: hidden;
+}
+
+.main-banner01 .quick-lnk {
+    display: table;
+    min-height: 240px;
+    float: left;
+}
+
+.main-banner01 .quick-lnk .ver-m {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.main-banner01 .quick-lnk .ver-m a {
+    display: block;
+    padding: 0 0 13px 0;
+    font-weight: bold;
+    font-size: 30px;
+    color: #fff
+}
+
+.main-banner01 .quick-lnk .ver-m p {
+    padding: 17px 0 0 0;
+    color: #fff;
+    background: url(/_res/me/img/main/bg_bar.png) no-repeat 50% 0;
+}
+
+.main-banner01 .quick-lnk.box01 {
+    background: url(/_res/me/img/main/bg_lnk01.gif) no-repeat 0 0;
+}
+
+.main-banner01 .quick-lnk.box02 {
+    margin: 0 3.5%;
+    background: url(/_res/me/img/main/bg_lnk01-02.gif) no-repeat 0 0;
+}
+
+.main-banner01 .quick-lnk.box03 {
+    background: url(/_res/me/img/main/bg_lnk01-03.gif) no-repeat 0 0;
+}
+
+.main-banner02 {
+    margin: 0 auto;
+    max-width: 1240px;
+    position: relative;
+    border: 1px solid #ececec;
+}

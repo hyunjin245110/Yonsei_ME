@@ -1,0 +1,3 @@
+[submodule "Monthly"]
+	path = Monthly
+	url = https://github.com/kthornbloom/Monthly

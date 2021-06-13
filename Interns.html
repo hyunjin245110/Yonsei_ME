@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+        <style>
+            .Sticky {
+                position: sticky;
+                top: 0;
+            }
+
+            .active .LeftRight {
+                animation: LeftRight 5s infinite linear;
+            }
+
+            @-webkit-keyframes LeftRight {
+                to {
+                    transform: unset;
+                }
+                100% {
+                    transform: translateX(-100%);
+                }
+            }
+        </style>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <!--script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script-->
+
+        <script src="/volatile/bootstrap/dist/js/bootstrap.bundle.min.js">
+        </script>
+
+        <script src="./Interns.js"></script>
+    </head>
+
+    <body class="container position-relative">
+
+        <nav style="height: 25vh" class="bg-primary">Dummy Menu</nav>
+
+
+        <!--section class="h3 my-3">
+            <span class="badge badge-pill bg-primary">Primary</span>
+            <span class="badge badge-pill bg-secondary">Secondary</span>
+            <span class="badge badge-pill bg-success">Success</span>
+            <span class="badge badge-pill bg-danger">Danger</span>
+            <span class="badge badge-pill bg-warning">Warning</span>
+            <span class="badge badge-pill bg-info">Info</span>
+            <span class="badge badge-pill bg-light">Light</span>
+            <span class="badge badge-pill bg-dark">Dark</span>
+        </section-->
+
+
+        <div class="Sticky d-flex justify-content-end ml-3" style="height: 0">
+            <div class="card pl-2">
+                <div class="card-body pl-5 text-center bg-light"></div>
+
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link">인턴 모집 공고</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">소개 ���료</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">소개 동영상</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">논문</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="Content" class="card-body pl-5"></div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div id="ScrollSpy" class="list-group d-inline-flex pr-0" style="padding-left: calc(var(--bs-gutter-x)/ 2);"></div>
+            <div style="width: 1px; opacity: 1; direction: rtl; margin-top: -10rem" class="d-flex flex-column align-content-center ml-auto p-0 bg-primary text-nowrap">
+            </div>
+        </div>
+
+
+        <div style="height: 90vh"></div>
+
+    </body>
+
+</html>
