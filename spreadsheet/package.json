@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.944.0",
+    "google-spreadsheet": "^3.1.15"
+  }
+}

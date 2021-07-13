@@ -1,5 +1,5 @@
 const Document = '1TxxuvaXz1kVONdzyozlJptIR9sIU1sJNJYi3AwJVl-k';
-const Key = "meyonsei.json";
+const Key = "spreadsheet.json";
 
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 const AWS = require('aws-sdk');
@@ -47,7 +47,7 @@ const main = () => (async() => {
         ]);
     })()
     .then(Body => s3.putObject({
-        Bucket: "hwangsehyun",
+        Bucket: "meyonsei",
         Key,
         Body,
         ContentType: "application/json",
@@ -64,7 +64,7 @@ module.exports.handler = (event, context) => {
         <h1>Success!</h1>
         <a href="https://docs.google.com/spreadsheets/d/${Document}/edit#gid=0">Google Spreadsheet</a>
         <br/>
-        <a href="https://hwangsehyun.s3-ap-southeast-1.amazonaws.com/${Key}">JSON<a/>
+        <a href="https://meyonsei.s3-ap-northeast-2.amazonaws.com/${Key}">JSON<a/>
     `]).then(([data, body]) => ({
         body: `<html>
             <body>${body}</body>
