@@ -41,7 +41,6 @@
         }
 
         .events {
-            border-top: 1px solid rgb(23, 30, 133);
             flex: 1;
             margin: 0;
             text-align: center;
@@ -90,20 +89,19 @@
                 for (let i = 0; i < 7; i++) {
                     const date = new Date();
                     date.setHours(0, 0, 0, 0);
-                    date.setDate(date.getDate() + i);
-                    console.log(date);
+                    date.setDate(date.getDate() + i + 1);
 
                     const date2 = new Date();
-                    date2.setHours(0, 0, 0, 0);
-                    date2.setDate(date.getDate() + i + 1);
-                    console.log(date2);
+                    date2.setHours(23, 59, 59, 999);
+                    date2.setDate(date.getDate());
+
+                    console.log(date, date2);
 
 
                     let wrapper = document.createElement('div');
 
                     let div = document.createElement('div');
                     div.classList.add('days');
-
                     div.textContent = DATES[date.getDay()];
                     wrapper.appendChild(div);
 
@@ -115,8 +113,9 @@
                     div = document.createElement('div');
                     div.classList.add('events');
                     intervals.forEach(([start, end, item]) => {
-                        if (date > start || end > date2)
-                            return;
+                        if ((start > date ? start : date) <= (end < date2 ? end : date2));
+                        else return;
+
                         const { summary } = item;
                         console.log(start, summary);
                         const event = document.createElement('div');
