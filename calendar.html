@@ -1,138 +1,141 @@
 <html>
-<meta charset="utf-8">
 
-    <head>
-        <meta charset="utf-8">
-        <style>
-            * {
-                margin: 0;
-                padding: 0;
-            }
-            
-            .calendar {
-                display:flex;
-            }
-            
-            .calendar >div {
-                flex-grow: 1;    
-            }
-            
+<head>
+    <meta charset="utf-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
 
-            .days{
-                border-top: 1px solid rgb(23, 30, 133);
-                border-left: 1px solid rgb(23, 30, 133);
-                border-right: 1px solid rgb(23, 30, 133);
-                display: block;
-                font-size: 15px;
-                color: rgba(0, 0, 0, 0.7);
-                background-color: white;
-                margin: 0;
-                text-align: left;  
-                            
+        .calendar {
+            display: flex;
+            align-items: stretch;
+            width: 100%;
+            background: #ccc;
+            height: 10rem;
+        }
 
-            }
-            .date{
-                padding-left: 20px;
-                border-left: 1px solid rgb(23, 30, 133);
-                border-right: 1px solid rgb(23, 30, 133);
-                border-bottom: 1px solid rgb(23, 30, 133);
-                background-color: white;
-                margin: 0;
-                text-align: left;
-                font-weight: 400;
-                font-size: 40px;
-                color: rgba(0, 0, 0, 0.7);
-            }
-            .events{
-                background-color: rgb(86, 86, 253);
-                margin: 0;
-                text-align: center;
-            }
-            
-            </style>
-        <script>
-            const EVENTS = {
-                "monthly": [{
-                    "id": 1,
-                    "name": "This is a JSON event",
-                    "startdate": "2021-5-15",
-                    "enddate": "2016-9-18",
-                    "starttime": "12:00",
-                    "endtime": "20:00",
-                    "color": "#FFB128",
-                }]
-            };
+        .calendar>div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgb(23, 30, 133);
+            background: white;
+        }
 
-            const DATES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        .days {
+            font-size: 15px;
+            color: rgba(0, 0, 0, 0.7);
+            margin: 0;
+            text-align: left;
+        }
+
+        .date {
+            padding-left: 20px;
+            margin: 0;
+            text-align: left;
+            font-weight: 400;
+            font-size: 40px;
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .events {
+            border-top: 1px solid rgb(23, 30, 133);
+            flex: 1;
+            margin: 0;
+            text-align: center;
+        }
+
+        .events>div {
+            background-color: rgb(86, 86, 253);
+        }
+    </style>
 
 
-            window.addEventListener('DOMContentLoaded', () => {
+    <script>
+        const EVENTS = {
+            "monthly": [{
+                "id": 1,
+                "name": "This is a JSON event",
+                "startdate": "2021-5-15",
+                "enddate": "2016-9-18",
+                "starttime": "12:00",
+                "endtime": "20:00",
+                "color": "#FFB128",
+            }]
+        };
+
+        const DATES = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+
+        window.addEventListener('DOMContentLoaded', () => {
+
+        });
+
+
+        fetch('https://www.googleapis.com/calendar/v3/calendars/0nevledgmf1pgvjsc57sp2tdik%40group.calendar.google.com/events?key=AIzaSyArR-qtXXWXuHXUuOOdWJrwALRCNKPuA84')
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                const intervals = data.items.map(item => [
+                    new Date(item.start.date || item.start.dateTime),
+                    new Date(item.end.date || item.end.dateTime),
+                    item,
+                ]);
+                console.log(intervals);
+                const root = document.body;
+                root.classList.add('calendar');
+
+                for (let i = 0; i < 7; i++) {
+                    const date = new Date();
+                    date.setHours(0, 0, 0, 0);
+                    date.setDate(date.getDate() + i);
+                    console.log(date);
+
+                    const date2 = new Date();
+                    date2.setHours(0, 0, 0, 0);
+                    date2.setDate(date.getDate() + i + 1);
+                    console.log(date2);
+
+
+                    let wrapper = document.createElement('div');
+
+                    let div = document.createElement('div');
+                    div.classList.add('days');
+
+                    div.textContent = DATES[date.getDay()];
+                    wrapper.appendChild(div);
+
+                    div = document.createElement('div');
+                    div.classList.add('date');
+                    div.textContent = date.getDate();
+                    wrapper.appendChild(div);
+
+                    div = document.createElement('div');
+                    div.classList.add('events');
+                    intervals.forEach(([start, end, item]) => {
+                        if (date > start || end > date2)
+                            return;
+                        const { summary } = item;
+                        console.log(start, summary);
+                        const event = document.createElement('div');
+                        event.textContent = summary;
+                        div.appendChild(event);
+                    });
+                    wrapper.appendChild(div);
+
+                    root.appendChild(wrapper);
+                }
 
             });
+    </script>
+</head>
 
-
-            fetch('https://www.googleapis.com/calendar/v3/calendars/0nevledgmf1pgvjsc57sp2tdik%40group.calendar.google.com/events?key=AIzaSyArR-qtXXWXuHXUuOOdWJrwALRCNKPuA84')
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data);
-                    const intervals = data.items.map(item => [
-                        new Date(item.start.date || item.start.dateTime),
-                        new Date(item.end.date || item.end.dateTime),
-                        item,
-                    ]);
-                    console.log(intervals);
-                    const root = document.body;
-                    root.classList.add('calendar');
-
-                    for (let i = 0; i < 7; i++) {
-                        const date = new Date();
-                        date.setHours(0, 0, 0, 0);
-                        date.setDate(date.getDate() + i);
-                        console.log(date);
-
-                        const date2 = new Date();
-                        date2.setHours(0, 0, 0, 0);
-                        date2.setDate(date.getDate() + i + 1);
-                        console.log(date2);
-
-
-                        let wrapper = document.createElement('div');
-
-                        let div = document.createElement('div');
-                        div.classList.add('days');
-                        
-                        div.textContent = DATES[date.getDay()];
-                        wrapper.appendChild(div);
-
-                        div = document.createElement('div');
-                        div.classList.add('date');
-                        div.textContent = date.getDate();
-                        wrapper.appendChild(div);
-
-                        div = document.createElement('div');
-                        div.classList.add('events');
-                        intervals.forEach(([start, end, item]) => {
-                            if (date > start || end > date2)
-                                return;
-                            const { summary } = item;
-                            console.log(start, summary);
-                            const event = document.createElement('div');
-                            event.textContent = summary;
-                            div.appendChild(event);
-                        });
-                        wrapper.appendChild(div);
-
-                        root.appendChild(wrapper);
-                    }
-
-                });
-        </script>
-    </head>
-
-    <body>
+<body>
 
 
 
-    </body>
+</body>
 
 </html>
